@@ -37,3 +37,35 @@ func SelectSort(data []int) {
 		}
 	}
 }
+
+// QuickSort 快速排序
+func QuickSort(data []int) {
+	n := len(data)
+	if n == 0 {
+		return
+	}
+
+	i, j := 0, n-1
+	pivot := data[0]
+	for i != j {
+		for ; j > i; j-- {
+			if data[j] < pivot {
+				break
+			}
+		}
+
+		for ; i < j; i++ {
+			if data[i] > pivot {
+				break
+			}
+		}
+
+		if i < j {
+			data[i], data[j] = data[j], data[i]
+		}
+	}
+
+	data[0], data[i] = data[i], data[0]
+	QuickSort(data[:i])
+	QuickSort(data[i+1:])
+}
