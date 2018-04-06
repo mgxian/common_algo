@@ -70,8 +70,8 @@ func QuickSort(data []int) {
 	QuickSort(data[i+1:])
 }
 
-// InsertSort 插入排序
-func InsertSort(data []int) {
+// InsertSortV1 插入排序
+func InsertSortV1(data []int) {
 	n := len(data)
 	if n == 0 {
 		return
@@ -101,5 +101,24 @@ func InsertSort(data []int) {
 
 	for i, v := range tmp {
 		data[i] = v
+	}
+}
+
+// InsertSortV2 插入排序
+func InsertSortV2(data []int) {
+	n := len(data)
+	if n == 0 {
+		return
+	}
+
+	current := 0
+	for i := 0; i < n-1; i++ {
+		current = data[i+1]
+		preIndex := i
+		for preIndex >= 0 && current < data[preIndex] {
+			data[preIndex+1] = data[preIndex]
+			preIndex--
+		}
+		data[preIndex+1] = current
 	}
 }
