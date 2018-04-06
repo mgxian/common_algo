@@ -15,3 +15,25 @@ func BubbleSort(data []int) {
 		}
 	}
 }
+
+// SelectSort 选择排序
+func SelectSort(data []int) {
+	n := len(data)
+	if n == 0 {
+		return
+	}
+
+	for i := 0; i < n-1; i++ {
+		idx := i
+		min := data[i]
+		for j := i + 1; j < n; j++ {
+			if min > data[j] {
+				idx = j
+				min = data[j]
+			}
+		}
+		if idx != i {
+			data[i], data[idx] = data[idx], data[i]
+		}
+	}
+}
