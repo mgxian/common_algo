@@ -69,3 +69,37 @@ func QuickSort(data []int) {
 	QuickSort(data[:i])
 	QuickSort(data[i+1:])
 }
+
+// InsertSort 插入排序
+func InsertSort(data []int) {
+	n := len(data)
+	if n == 0 {
+		return
+	}
+
+	tmp := make([]int, n)
+	tmp[0] = data[0]
+	for i := 1; i < n; i++ {
+		// fmt.Println(tmp)
+		if data[i] >= tmp[i-1] {
+			tmp[i] = data[i]
+		} else {
+			idx := 0
+			for j := i - 2; j >= 0; j-- {
+				if data[i] >= tmp[j] {
+					idx = j + 1
+					break
+				}
+			}
+			// fmt.Println(idx)
+			for k := i; k > idx; k-- {
+				tmp[k] = tmp[k-1]
+			}
+			tmp[idx] = data[i]
+		}
+	}
+
+	for i, v := range tmp {
+		data[i] = v
+	}
+}
