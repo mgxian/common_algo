@@ -25,5 +25,5 @@ func getRandomIntSlice(min, max, size int) (randomIntSlice []int) {
 
 func main() {
 	data := []int{1, 2, 3, 4, 5, 6, 7}
-	fmt.Println(search.HashSearch(data, 5))
+	fmt.Println(search.BlockSearch(data, 5))
 }

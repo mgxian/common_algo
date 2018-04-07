@@ -130,3 +130,8 @@ func HashSearch(data []int, value int) (index int, founded bool) {
 	v, ok := hashTable[value]
 	return v, ok
 }
+
+// BlockSearch 块查找
+func BlockSearch(data []int, value int) (index int, founded bool) {
+	return BinarySearchV2(data, value)
+}
