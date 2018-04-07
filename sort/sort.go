@@ -122,3 +122,25 @@ func InsertSortV2(data []int) {
 		data[preIndex+1] = current
 	}
 }
+
+// ShellSort 希尔排序
+func ShellSort(data []int) {
+	n := len(data)
+	if n == 0 {
+		return
+	}
+
+	gap := n / 2
+	for gap > 0 {
+		for i := gap; i < n; i++ {
+			current := data[i]
+			preIndex := i - gap
+			for preIndex >= 0 && current < data[preIndex] {
+				data[preIndex+gap] = data[preIndex]
+				preIndex -= gap
+			}
+			data[preIndex+gap] = current
+		}
+		gap = gap / 2
+	}
+}
