@@ -35,7 +35,28 @@ func BinarySearchV1(data []int, value int, low, high int) (index int, founded bo
 func BinarySearchV2(data []int, value int) (index int, founded bool) {
 	low, high := 0, len(data)-1
 	for low <= high {
-		mid := (high - low) / 2
+		mid := low + (high-low)/2
+		if data[mid] == value {
+			index = mid
+			founded = true
+			return
+		}
+
+		if data[mid] > value {
+			high = mid - 1
+		} else {
+			low = mid + 1
+		}
+	}
+	return
+}
+
+// InsertionSearch 插值查找
+func InsertionSearch(data []int, value int) (index int, founded bool) {
+	low, high := 0, len(data)-1
+	for low <= high {
+		// mid := low + 1/2*(high-low)
+		mid := low + (value-data[low])/(data[high]-data[low])*(high-low)
 		if data[mid] == value {
 			index = mid
 			founded = true
