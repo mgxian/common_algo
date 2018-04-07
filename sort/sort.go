@@ -209,3 +209,46 @@ func merge2(left, right []int) (result []int) {
 
 	return
 }
+
+// HeapSort 希尔排序
+func HeapSort(data []int) {
+	n := len(data)
+	if n == 0 {
+		return
+	}
+
+	buildHeap(data)
+	// fmt.Println(data)
+	for n > 0 {
+		data[0], data[n-1] = data[n-1], data[0]
+		n--
+		adjustHeap(data[:n], 0)
+		// fmt.Println(n, "--> ", data)
+	}
+}
+
+func buildHeap(data []int) {
+	for i := (len(data) - 1) / 2; i >= 0; i-- {
+		adjustHeap(data, i)
+	}
+}
+
+func adjustHeap(data []int, i int) {
+	maxIndex := i
+	dataLength := len(data)
+
+	// left
+	if i*2+1 < dataLength && data[i*2+1] > data[maxIndex] {
+		maxIndex = i*2 + 1
+	}
+
+	// right
+	if i*2+2 < dataLength && data[i*2+2] > data[maxIndex] {
+		maxIndex = i*2 + 2
+	}
+
+	if maxIndex != i {
+		data[maxIndex], data[i] = data[i], data[maxIndex]
+		adjustHeap(data, maxIndex)
+	}
+}
