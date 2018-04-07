@@ -1,5 +1,9 @@
 package sort
 
+import (
+	"strconv"
+)
+
 // BubbleSort 冒泡排序
 func BubbleSort(data []int) {
 	n := len(data)
@@ -340,5 +344,46 @@ func BucketSort(data []int, bucketSize int) []int {
 	}
 
 	// fmt.Println("result ------> ", result)
+	return result
+}
+
+// RadixSort 基数排序
+func RadixSort(data []int) []int {
+	n := len(data)
+	if n < 2 {
+		return data
+	}
+
+	max := data[0]
+	for i := 1; i < n; i++ {
+		if max < data[i] {
+			max = data[i]
+		}
+	}
+
+	bucketCount := 10
+	result := make([]int, n)
+	copy(result, data)
+
+	mod, div := 10, 1
+	for i := 0; i < len(strconv.Itoa(max)); i++ {
+		buckets := make([][]int, bucketCount)
+		for j := 0; j < n; j++ {
+			idx := result[j] % mod / div
+			// fmt.Println(idx)
+			buckets[idx] = append(buckets[idx], result[j])
+		}
+		mod *= 10
+		div *= 10
+		// fmt.Println(buckets)
+		m := 0
+		for k := 0; k < bucketCount; k++ {
+			for _, v := range buckets[k] {
+				result[m] = v
+				m++
+			}
+		}
+	}
+
 	return result
 }

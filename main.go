@@ -24,7 +24,7 @@ func getRandomIntSlice(min, max, size int) (randomIntSlice []int) {
 }
 
 func main() {
-	randomIntSlice := getRandomIntSlice(1, 100, 10)
+	randomIntSlice := getRandomIntSlice(1, 1000, 10)
 	fmt.Println(randomIntSlice)
-	fmt.Println(sort.BucketSort(randomIntSlice, 10))
+	fmt.Println(sort.RadixSort(randomIntSlice))
 }
