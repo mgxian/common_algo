@@ -291,3 +291,54 @@ func CountingSort(data []int) {
 		}
 	}
 }
+
+// BucketSort 桶排序
+func BucketSort(data []int, bucketSize int) []int {
+	n := len(data)
+	if n < 2 {
+		return data
+	}
+
+	if bucketSize == 0 {
+		return data
+	}
+
+	max, min := data[0], data[0]
+	for i := 1; i < n; i++ {
+		if max < data[i] {
+			max = data[i]
+		}
+
+		if min > data[i] {
+			min = data[i]
+		}
+	}
+
+	bucketCount := (max-min)/bucketSize + 1
+	buckets := make([][]int, bucketCount)
+	result := make([]int, 0)
+	// for i := 0; i < bucketCount; i++ {
+	// 	buckets[i] = make([]int, 0)
+	// }
+
+	// fmt.Println(bucketSize, bucketCount)
+	for i := 0; i < n; i++ {
+		bucketIndex := (data[i] - min) / bucketSize
+		buckets[bucketIndex] = append(buckets[bucketIndex], data[i])
+	}
+
+	// fmt.Println("buckets ------> ", buckets)
+	for i := 0; i < bucketCount; i++ {
+		// fmt.Println(buckets[i])
+		if bucketCount == 1 {
+			bucketSize--
+		}
+		tmp := BucketSort(buckets[i], bucketSize)
+		for j := 0; j < len(tmp); j++ {
+			result = append(result, tmp[j])
+		}
+	}
+
+	// fmt.Println("result ------> ", result)
+	return result
+}
