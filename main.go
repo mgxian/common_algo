@@ -26,6 +26,6 @@ func getRandomIntSlice(min, max, size int) (randomIntSlice []int) {
 func main() {
 	randomIntSlice := getRandomIntSlice(1, 100, 10)
 	fmt.Println(randomIntSlice)
-	sort.HeapSort(randomIntSlice)
+	sort.CountingSort(randomIntSlice)
 	fmt.Println(randomIntSlice)
 }

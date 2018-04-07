@@ -3,7 +3,7 @@ package sort
 // BubbleSort 冒泡排序
 func BubbleSort(data []int) {
 	n := len(data)
-	if n == 0 {
+	if n < 2 {
 		return
 	}
 
@@ -19,7 +19,7 @@ func BubbleSort(data []int) {
 // SelectSort 选择排序
 func SelectSort(data []int) {
 	n := len(data)
-	if n == 0 {
+	if n < 2 {
 		return
 	}
 
@@ -41,7 +41,7 @@ func SelectSort(data []int) {
 // QuickSort 快速排序
 func QuickSort(data []int) {
 	n := len(data)
-	if n == 0 {
+	if n < 2 {
 		return
 	}
 
@@ -73,7 +73,7 @@ func QuickSort(data []int) {
 // InsertSortV1 插入排序
 func InsertSortV1(data []int) {
 	n := len(data)
-	if n == 0 {
+	if n < 2 {
 		return
 	}
 
@@ -107,7 +107,7 @@ func InsertSortV1(data []int) {
 // InsertSortV2 插入排序
 func InsertSortV2(data []int) {
 	n := len(data)
-	if n == 0 {
+	if n < 2 {
 		return
 	}
 
@@ -126,7 +126,7 @@ func InsertSortV2(data []int) {
 // ShellSort 希尔排序
 func ShellSort(data []int) {
 	n := len(data)
-	if n == 0 {
+	if n < 2 {
 		return
 	}
 
@@ -210,7 +210,7 @@ func merge2(left, right []int) (result []int) {
 	return
 }
 
-// HeapSort 希尔排序
+// HeapSort 堆排序
 func HeapSort(data []int) {
 	n := len(data)
 	if n == 0 {
@@ -250,5 +250,44 @@ func adjustHeap(data []int, i int) {
 	if maxIndex != i {
 		data[maxIndex], data[i] = data[i], data[maxIndex]
 		adjustHeap(data, maxIndex)
+	}
+}
+
+// CountingSort 计数排序
+func CountingSort(data []int) {
+	n := len(data)
+	if n < 2 {
+		return
+	}
+	max, min := data[0], data[0]
+	for i := 1; i < n; i++ {
+		if max < data[i] {
+			max = data[i]
+		}
+
+		if min > data[i] {
+			min = data[i]
+		}
+	}
+
+	base := max - min
+	// fmt.Println(max, min, base)
+	bucket := make([]int, base+1)
+	for i := 0; i < n; i++ {
+		idx := data[i] - min
+		// fmt.Println(idx)
+		bucket[idx]++
+	}
+
+	// fmt.Println(bucket)
+	j := 0
+	for i := 0; i < base+1; i++ {
+		count := bucket[i]
+		for count > 0 {
+			// fmt.Println(min + i)
+			data[j] = min + i
+			j++
+			count--
+		}
 	}
 }
