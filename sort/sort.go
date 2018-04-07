@@ -144,3 +144,68 @@ func ShellSort(data []int) {
 		gap = gap / 2
 	}
 }
+
+// MergeSort 归并排序
+func MergeSort(data []int) []int {
+	n := len(data)
+	if n < 2 {
+		return data
+	}
+
+	mid := n / 2
+
+	return merge(MergeSort(data[:mid]), MergeSort(data[mid:]))
+}
+
+func merge(left, right []int) []int {
+	leftLength := len(left)
+	rightLength := len(right)
+	resultLength := leftLength + rightLength
+	result := make([]int, resultLength)
+	for i, j, index := 0, 0, 0; index < resultLength; index++ {
+		if i >= leftLength {
+			result[index] = right[j]
+			j++
+		} else if j >= rightLength {
+			result[index] = left[i]
+			i++
+		} else if left[i] > right[j] {
+			result[index] = right[j]
+			j++
+		} else {
+			result[index] = left[i]
+			i++
+		}
+	}
+
+	return result
+}
+
+func merge2(left, right []int) (result []int) {
+	result = make([]int, len(left)+len(right))
+
+	i := 0
+	for len(left) > 0 && len(right) > 0 {
+		if left[0] < right[0] {
+			result[i] = left[0]
+			left = left[1:]
+		} else {
+			result[i] = right[0]
+			right = right[1:]
+		}
+		i++
+	}
+
+	// Either left or right may have elements left; consume them.
+	// (Only one of the following loops will actually be entered.)
+	for j := 0; j < len(left); j++ {
+		result[i] = left[j]
+		i++
+	}
+	for j := 0; j < len(right); j++ {
+		result[i] = right[j]
+		i++
+	}
+
+	return
+}
