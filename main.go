@@ -5,7 +5,7 @@ import (
 	"math/rand"
 	"time"
 
-	"github.com/mgxian/common_algo/sort"
+	"github.com/mgxian/common_algo/search"
 )
 
 func getRandomIntSlice(min, max, size int) (randomIntSlice []int) {
@@ -24,7 +24,6 @@ func getRandomIntSlice(min, max, size int) (randomIntSlice []int) {
 }
 
 func main() {
-	randomIntSlice := getRandomIntSlice(1, 1000, 10)
-	fmt.Println(randomIntSlice)
-	fmt.Println(sort.RadixSort(randomIntSlice))
+	data := []int{1, 2, 3, 4, 5, 6, 7, 8, 9, 10}
+	fmt.Println(search.SequenceSearch(data, 5))
 }
