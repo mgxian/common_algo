@@ -119,3 +119,14 @@ func FibonacciSearch(data []int, value int) (index int, founded bool) {
 	}
 	return
 }
+
+// HashSearch 哈希查找 没有实现，只是利用map说明问题
+func HashSearch(data []int, value int) (index int, founded bool) {
+	hashTable := make(map[int]int)
+	for idx, v := range data {
+		hashTable[v] = idx
+	}
+
+	v, ok := hashTable[value]
+	return v, ok
+}
